@@ -6,7 +6,7 @@ package ru.job4j.calculate;
 *@author Niyaz Fazlyev
 */
 
-public class Calculate{
+public class Calculate {
 	/**
 	 * Method echo.
 	 * @param name Your name.
@@ -14,14 +14,14 @@ public class Calculate{
 	 */
 	 public String echo(String name) {
 		return "Echo, echo, echo : " + name;
-	 }
+	}
 
 	/**
 	*main
 	*print "Hello World"
 	*/
 		
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		System.out.println("Hello World");
 	}
 	
