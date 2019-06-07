@@ -12,15 +12,16 @@ public class Calculate {
 	 * @param name Your name.
 	 * @return Echo plus your name.
 	 */
+
 	 public String echo(String name) {
 		return "Echo, echo, echo : " + name;
 	}
 
 	/**
-	*main
-	*print "Hello World"
-	*/
-		
+	 *main
+	 *print "Hello World"
+	 */
+
 	public static void main(String[] args) {
 		System.out.println("Hello World");
 	}
