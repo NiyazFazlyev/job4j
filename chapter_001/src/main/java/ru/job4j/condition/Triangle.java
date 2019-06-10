@@ -28,7 +28,7 @@ public class Triangle {
      * @return можно или нельзя построить треугольник.
      */
     private boolean exist(double a, double c, double b) {
-        return (a + b > c) & (a + c > b) & (b + c > a);
+        return (a + b > c) && (a + c > b) && (b + c > a);
     }
 
     /**
