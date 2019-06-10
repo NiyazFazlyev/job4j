@@ -1,8 +1,8 @@
 package ru.job4j.calculator;
 
 /**
- *Calculator
- *Ифышс operations of a simple calculator.
+ *Calculator.
+ *Basic operations of a simple calculator.
  *@author Niyaz Fazlyev
  */
 
