@@ -68,44 +68,32 @@ public class Logic {
 
     public boolean isWin() {
         int[][] table = this.convert();
-        int count = 0; //счетчик
+        int count1; //счетчик
+        int count2; //счетчик
         boolean result = false;
 
         //Поиск строки из 1
-        for (int line = 0; line != table.length; line++) {
+        for (int out = 0; out != table.length; out++) {
+            count1 = 0;
+            count2 = 0;
             if (result) {
                 break; //Если уже есть строчка из 1, то дальше не ищем
             }
-            for (int column = 0; column != table.length; column++) {
-                if (table[line][column] == 0) {
-                    count = 0; //обнуляем счетчик
-                    break; //если встречается ноль, то переходим к следующей строке
+            for (int in = 0; in != table.length; in++) {
+                if (table[out][in] == 1) {
+                    count1++;
                 }
-                count++;
+                if (table[in][out] == 1) {
+                    count2++;
+                }
             }
-            if (count == table.length) {
+            if (count1 == table.length || count2 == table.length) {
                 result = true; //если число единиц равно длине строки, возвращаем true
-            }
-        }
-
-        //Поиск столбца из 1
-        for (int column = 0; column != table.length; column++) {
-            if (result) {
-                break; //Если уже есть столбец или строка из 1, то дальше не ищем
-            }
-            for (int line = 0; line != table.length; line++) {
-                if (table[line][column] == 0) {
-                    count = 0; //обнуляем счетчик
-                    break; //если встречается ноль, то переходим к следующему столбцу
-                }
-                count++;
-            }
-            if (count == table.length) {
-                result = true; //если число единиц равно высоте столбца, возвращаем true
             }
         }
         return result;
     }
+
 
     public int[][] convert() {
         int[][] table = new int[this.size][this.size];
