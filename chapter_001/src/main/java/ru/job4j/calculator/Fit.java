@@ -4,7 +4,6 @@ package ru.job4j.calculator;
  * Программа расчета идеального веса.
  */
 public class Fit {
-
     /**
      * Идеальный вес для мужщины.
      *

@@ -4,7 +4,6 @@ package ru.job4j.array;
  * Обертка над строкой.
  */
 public class ArrayChar {
-
     /**
      * Проверяет. что слово начинается с префикса.
      *
@@ -15,14 +14,12 @@ public class ArrayChar {
         boolean result = true;
         char[] pref = prefix.toCharArray();
         char[] wrd = word.toCharArray();
-
         for (int i = 0; i != pref.length; i++) {
             if (wrd[i] != pref[i]) {
                 result = false;
                 break;
             }
         }
-        // проверить. что массив data имеет первые элементы одинаковые с value
         return result;
     }
 }

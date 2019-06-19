@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class ArrayDuplicate {
     /**
      * Метод удаляет дубликаты (повторяющиеся элементы) из массива.
-     *
      * @param array Входной массив.
      * @return Массив без дубликатов.
      */

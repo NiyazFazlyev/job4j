@@ -14,7 +14,6 @@ public class Check {
                 result = false;
                 break;
             }
-
         }
         return result;
     }
