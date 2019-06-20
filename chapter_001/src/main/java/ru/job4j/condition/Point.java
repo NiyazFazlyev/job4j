@@ -2,15 +2,34 @@ package ru.job4j.condition;
 
 public class Point {
     /**
-     * Вычисление расстояния между двумя точками.
+     * x и y координаты точки.
+     */
+    private int x;
+    private int y;
+
+    /**
+     * Конструктор для установки начальных координат точки.
      *
-     * @param x1 x-координата первой точки.
-     * @param y1 y-координата первой точки.
-     * @param x2 x-координата второй точки.
-     * @param y2 y-координата второй точки.
+     * @param first  x координата.
+     * @param second y координата.
+     */
+    public Point(int first, int second) {
+        this.x = first;
+        this.y = second;
+    }
+    /**
+     * Вычисление расстояния между двумя точками.
+     * @param that точка до которой вычисляем расстояние.
      * @return Расстояние.
      */
-    public double distance(int x1, int y1, int x2, int y2) {
-        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+    public double distance(Point that) {
+        return Math.sqrt(Math.pow(that.x - this.x, 2) + Math.pow(that.y - this.y, 2));
+    }
+
+    /**
+     * Вывод на экран координат точки.
+     */
+    public void info() {
+        System.out.println(String.format("Point[%s, %s]", this.x, this.y));
     }
 }
