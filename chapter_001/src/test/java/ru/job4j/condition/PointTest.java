@@ -25,10 +25,21 @@ public class PointTest {
     }
 
     @Test
+    public void whenThereAre3Coord() {
+        Point first = new Point(0, 0, 1);
+        Point second = new Point(0, 3, 5);
+        double result = first.distance(second);
+        first.info();
+        second.info();
+        System.out.println(String.format("Result is %s", result));
+        assertThat(result, is(5D));
+    }
+
+    @Test
     public void whenShowInfo() {
         Point first = new Point(1, 1);
         first.info();
-        Point second = new Point(2, 2);
+        Point second = new Point(2, 2, 5);
         second.info();
     }
 }
