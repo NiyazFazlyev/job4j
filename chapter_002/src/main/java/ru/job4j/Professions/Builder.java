@@ -1,4 +1,4 @@
-package ru.job4j.tracker;
+package ru.job4j.Professions;
 
 public class Builder extends Engineer {
     private boolean helmet;
