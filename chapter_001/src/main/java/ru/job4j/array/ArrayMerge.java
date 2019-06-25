@@ -10,9 +10,10 @@ public class ArrayMerge {
      * @return Объединненый массив
      */
 
-    public int[] MergeSortArrays(int[] first, int[] second) {
+    public int[] mergeSortArrays(int[] first, int[] second) {
         int[] merged = new int[first.length + second.length];
-        int i = 0, j = 0;
+        int i = 0;
+        int j = 0;
         while ((i < first.length) && (j < second.length)) {
             if (first[i] > second[j]) {
                 merged[i + j] = second[j];

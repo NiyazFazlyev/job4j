@@ -101,6 +101,8 @@ public class StartUI {
                 case EXIT:
                     exit = true;
                     break;
+                default:
+                    break;
             }
         }
 
