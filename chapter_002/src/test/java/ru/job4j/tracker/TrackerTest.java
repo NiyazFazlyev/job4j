@@ -77,8 +77,26 @@ public class TrackerTest {
         Item item5 = new Item("test5", "testDescription", 123L);
         tracker.add(item5);
         tracker.delete(item1.getId());
-        tracker.delete(item4.getId());
-        Item[] result = {item2, item3, item5};
+        tracker.delete(item5.getId());
+        Item[] result = {item2, item3, item4};
+        assertThat(tracker.findAll(), is(result));
+    }
+
+    @Test
+    public void whenDeleteLastItem() {
+        Tracker tracker = new Tracker();
+        String name;
+        long time;
+        Item[] items = new Item[100];
+        Item[] result = new Item[99];
+        for (int i = 0; i != 100; i++) {
+            name = String.format("name %s", i);
+            time = System.currentTimeMillis();
+            items[i] = new Item(name, "testDescription", time);
+            tracker.add(items[i]);
+        }
+        System.arraycopy(items, 0, result, 0, 99);
+        tracker.delete(items[99].getId());
         assertThat(tracker.findAll(), is(result));
     }
 }

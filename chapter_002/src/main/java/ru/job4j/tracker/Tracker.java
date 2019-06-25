@@ -37,6 +37,7 @@ public class Tracker {
     public boolean replace(String id, Item item) {
         boolean result = false;
         int pos = findPosition(id);
+        item.setId(id);
         if (pos != -1) {
             this.items[pos] = item;
             result = true;
@@ -54,11 +55,12 @@ public class Tracker {
         boolean result = false;
         int pos = this.findPosition(id);
         Item[] tmp = new Item[100];
-        if (pos != -1) {
-            System.arraycopy(this.items, 0, tmp, 0, pos);
-            System.arraycopy(this.items, pos + 1, tmp, pos, 100 - pos - 1);
-            System.arraycopy(tmp, 0, items, 0, 100);
-            position--;
+        if (pos != -1 && pos != this.items.length - 1) {
+            System.arraycopy(this.items, pos + 1, this.items, pos, position - pos - 1);
+            this.items[--position] = null;
+            result = true;
+        } else if (pos == this.items.length - 1) {
+            this.items[--position] = null;
             result = true;
         }
         return result;
