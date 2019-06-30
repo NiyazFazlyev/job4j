@@ -19,8 +19,6 @@ public class StartUITest {
     ByteArrayOutputStream out = new ByteArrayOutputStream();
 
     StringBuilder menu = new StringBuilder()
-            .append("Меню.")
-            .append(System.lineSeparator())
             .append("0. Add new Item")
             .append(System.lineSeparator())
             .append("1. Show all Items")
@@ -33,7 +31,7 @@ public class StartUITest {
             .append(System.lineSeparator())
             .append("5. Find Items by name")
             .append(System.lineSeparator())
-            .append("6. Exit program")
+            .append("6. Exit Program")
             .append(System.lineSeparator());
 
     @Before
@@ -112,6 +110,8 @@ public class StartUITest {
                                 .append("    Create Time : " + item2.getTime())
                                 .append(System.lineSeparator())
                                 .append(menu)
+                                .append("До встречи!")
+                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
@@ -145,6 +145,8 @@ public class StartUITest {
                                 .append("    Create Time : " + item3.getTime())
                                 .append(System.lineSeparator())
                                 .append(menu)
+                                .append("До встречи!")
+                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
