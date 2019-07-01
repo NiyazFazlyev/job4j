@@ -23,11 +23,7 @@ public class StubInput implements Input {
     }
 
     /**
-     * Давайте рассмотрим, как работает этот метод.
-     * у нас есть объект в котором содержатся заранее продуманные ответы.
-     * При последовательном вызове метода ask нам надо возвращать соответствующие данные.
-     * Как если бы мы симулировали поведение пользователя.
-     * Для этого при каждом вызове метода ask мы увеличиваем счетчик и
+     * При каждом вызове метода ask мы увеличиваем счетчик и
      * при следующем вызове он вернет нам новое значение.
      */
     @Override
@@ -35,7 +31,20 @@ public class StubInput implements Input {
         return this.value[this.position++];
     }
 
+    @Override
     public int ask(String question, int[] range) {
-        throw new UnsupportedOperationException("Unsupported operation");
+        int key = Integer.valueOf(this.ask(question));
+        boolean exist = false;
+        for (int value : range) {
+            if (value == key) {
+                exist = true;
+                break;
+            }
+        }
+        if (exist) {
+            return key;
+        } else {
+            throw new MenuOutException("Out of menu range");
+        }
     }
 }
