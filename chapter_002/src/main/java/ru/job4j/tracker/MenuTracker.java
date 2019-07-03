@@ -15,14 +15,14 @@ public class MenuTracker {
         this.tracker = tracker;
     }
 
-    public void fillActions() {
+    public void fillActions(StartUI ui) {
         this.actions[0] = new AddItem(0, "Add new Item");
         this.actions[1] = new ShowItems(1, "Show all Items");
         this.actions[2] = new EditItem(2, "Edit Item");
         this.actions[3] = new DeleteItem(3, "Delete Item");
         this.actions[4] = new FindById(4, "Find Item by id");
         this.actions[5] = new FindByName(5, "Find Items by name");
-        this.actions[6] = new ExitProgram(6, "Exit Program");
+        this.actions[6] = new ExitProgram(ui, 6, "Exit Program");
     }
 
     public void select(int key) {
@@ -142,11 +142,18 @@ public class MenuTracker {
     }
 
     private class ExitProgram extends BaseAction {
+        private StartUI ui;
+
+        public ExitProgram(StartUI ui, int key, String name) {
+            super(key, name);
+            this.ui = ui;
+        }
         public ExitProgram(int key, String name) {
             super(key, name);
         }
         public void execute(Input input, Tracker tracker) {
             System.out.println("До встречи!");
+            ui.stop();
         }
     }
 }

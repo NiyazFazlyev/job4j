@@ -13,6 +13,8 @@ public class StartUI {
      */
     private final Tracker tracker;
 
+    private boolean working = true;
+
     /**
      * Конструтор инициализирующий поля.
      *
@@ -40,7 +42,7 @@ public class StartUI {
         MenuTracker menu = new MenuTracker(input, tracker);
         int actions = menu.getActionsLenght();
         int[] range = new int[actions];
-        menu.fillActions();
+        menu.fillActions(this);
         for (int i = 0; i != actions; i++) {
             range[i] = i;
         }
@@ -53,8 +55,12 @@ public class StartUI {
             if (key == 6) {
                 break;
             }
-        } while (true);
+        } while (working);
 
+    }
+
+    public void stop() {
+        working = false;
     }
 
 }
