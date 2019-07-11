@@ -1,8 +1,6 @@
 package ru.job4j.chess;
 
-import ru.job4j.chess.firuges.Cell;
-import ru.job4j.chess.firuges.Figure;
-import ru.job4j.chess.firuges.ImposibleMoveException;
+import ru.job4j.chess.firuges.*;
 
 /**
  * //TODO add comments.
@@ -19,20 +17,26 @@ public class Logic {
         this.figures[this.index++] = figure;
     }
 
-    public boolean move(Cell source, Cell dest) {
+    public boolean move(Cell source, Cell dest) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         boolean rst = false;
         int index = this.findBy(source);
-        if (index != -1) {
-            try {
-                Cell[] steps = this.figures[index].way(source, dest);
-                if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                    rst = true;
-                    this.figures[index] = this.figures[index].copy(dest);
-                }
-            } catch (ImposibleMoveException ime) {
-                System.out.println("Please correct move");
+        if (index == -1) {
+            throw new FigureNotFoundException("Empty cell");
+        }
+
+        Cell[] steps = this.figures[index].way(source, dest);
+        for (Cell cell : steps) {
+            index = this.findBy(cell);
+            if (index != -1) {
+                throw new OccupiedWayException("Occupied Way");
             }
         }
+        if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+            rst = true;
+            this.figures[index] = this.figures[index].copy(dest);
+        }
+
+
         return rst;
     }
 

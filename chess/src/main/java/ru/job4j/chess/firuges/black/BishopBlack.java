@@ -2,7 +2,7 @@ package ru.job4j.chess.firuges.black;
 
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
-import ru.job4j.chess.firuges.ImposibleMoveException;
+import ru.job4j.chess.firuges.ImpossibleMoveException;
 
 /**
  * @author Petr Arsentev (parsentev@yandex.ru)
@@ -22,9 +22,9 @@ public class BishopBlack implements Figure {
     }
 
     @Override
-    public Cell[] way(Cell source, Cell dest) {
-        if (!isDiagonal(source, dest)) {
-            throw new ImposibleMoveException("No diagonal");
+    public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
+        if ((!isDiagonal(source, dest)) || dest.equals(source)) {
+            throw new ImpossibleMoveException("No diagonal");
         }
         int deltaX = dest.x - source.x;
         int deltaY = dest.y - source.y;
