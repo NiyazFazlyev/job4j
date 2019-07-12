@@ -1,6 +1,10 @@
 package ru.job4j.chess;
 
-import ru.job4j.chess.firuges.*;
+import ru.job4j.chess.firuges.Cell;
+import ru.job4j.chess.firuges.Figure;
+import ru.job4j.chess.firuges.exceptions.FigureNotFoundException;
+import ru.job4j.chess.firuges.exceptions.ImpossibleMoveException;
+import ru.job4j.chess.firuges.exceptions.OccupiedWayException;
 
 /**
  * //TODO add comments.
@@ -23,11 +27,9 @@ public class Logic {
         if (index == -1) {
             throw new FigureNotFoundException("Empty cell");
         }
-
         Cell[] steps = this.figures[index].way(source, dest);
         for (Cell cell : steps) {
-            index = this.findBy(cell);
-            if (index != -1) {
+            if (this.findBy(cell) != -1) {
                 throw new OccupiedWayException("Occupied Way");
             }
         }
@@ -35,8 +37,6 @@ public class Logic {
             rst = true;
             this.figures[index] = this.figures[index].copy(dest);
         }
-
-
         return rst;
     }
 
