@@ -4,7 +4,9 @@ import java.util.List;
 
 public class ConvertList2Array {
     public int[][] toArray(List<Integer> list, int rows) {
-        int cells = (int) (Math.ceil((double) list.size() / (double) rows));
+        int cells = (int) (Math.ceil(
+                (double) list.size() / (double) rows)
+        );
         int[][] array = new int[rows][3];
         int index = 0;
         for (int i = 0; i != rows; i++) {
