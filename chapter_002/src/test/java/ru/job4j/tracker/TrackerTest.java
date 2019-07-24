@@ -2,6 +2,10 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -41,8 +45,9 @@ public class TrackerTest {
         tracker.add(item2);
         Item item3 = new Item("test3", "testDescription", 125L);
         tracker.add(item3);
-        Item[] result = {item1, item2, item3};
-        assertThat(tracker.findAll(), is(result));
+        Item[] mas = {item1, item2, item3};
+        List<Item> expect = Arrays.asList(mas);
+        assertThat(tracker.findAll(), is(expect));
     }
 
     @Test
@@ -58,8 +63,8 @@ public class TrackerTest {
         tracker.add(item4);
         Item item5 = new Item("test2", "testDescription", 123L);
         tracker.add(item5);
-        Item[] result = {item1, item3, item4};
-        assertThat(tracker.findByName("test1"), is(result));
+        List<Item> expect = Arrays.asList(item1, item3, item4);
+        assertThat(tracker.findByName("test1"), is(expect));
     }
 
 
@@ -78,8 +83,8 @@ public class TrackerTest {
         tracker.add(item5);
         tracker.delete(item1.getId());
         tracker.delete(item5.getId());
-        Item[] result = {item2, item3, item4};
-        assertThat(tracker.findAll(), is(result));
+        List<Item> expect = Arrays.asList(item2, item3, item4);
+        assertThat(tracker.findAll(), is(expect));
     }
 
     @Test
@@ -87,16 +92,16 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         String name;
         long time;
-        Item[] items = new Item[100];
-        Item[] result = new Item[99];
+        ArrayList<Item> items = new ArrayList<>();
         for (int i = 0; i != 100; i++) {
             name = String.format("name %s", i);
             time = System.currentTimeMillis();
-            items[i] = new Item(name, "testDescription", time);
-            tracker.add(items[i]);
+            Item item = new Item(name, "testDescription", time);
+            items.add(item);
+            tracker.add(item);
         }
-        System.arraycopy(items, 0, result, 0, 99);
-        tracker.delete(items[99].getId());
-        assertThat(tracker.findAll(), is(result));
+        List<Item> expect = items.subList(0, 99);
+        tracker.delete(items.get(99).getId());
+        assertThat(tracker.findAll(), is(expect));
     }
 }

@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Tracker {
@@ -10,11 +11,7 @@ public class Tracker {
     /**
      * Массив для хранение заявок.
      */
-    private Item[] items = new Item[100];
-    /**
-     * Указатель ячейки для новой заявки.
-     */
-    private int position = 0;
+    private ArrayList<Item> items = new ArrayList<>();
 
     /**
      * Метод реализаущий добавление заявки в хранилище.
@@ -23,7 +20,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -39,7 +36,8 @@ public class Tracker {
         int pos = findPosition(id);
         item.setId(id);
         if (pos != -1) {
-            this.items[pos] = item;
+            this.items.set(pos, item);
+            //this.items[pos] = item;
             result = true;
         }
         return result;
@@ -54,13 +52,8 @@ public class Tracker {
     public boolean delete(String id) {
         boolean result = false;
         int pos = this.findPosition(id);
-        Item[] tmp = new Item[100];
-        if (pos != -1 && pos != this.items.length - 1) {
-            System.arraycopy(this.items, pos + 1, this.items, pos, position - pos - 1);
-            this.items[--position] = null;
-            result = true;
-        } else if (pos == this.items.length - 1) {
-            this.items[--position] = null;
+        if (pos != -1) {
+            this.items.remove(pos);
             result = true;
         }
         return result;
@@ -71,10 +64,8 @@ public class Tracker {
      *
      * @return Массив заявок.
      */
-    public Item[] findAll() {
-        Item[] result = new Item[this.position];
-        System.arraycopy(this.items, 0, result, 0, position);
-        return result;
+    public ArrayList<Item> findAll() {
+        return this.items;
     }
 
     /**
@@ -83,16 +74,13 @@ public class Tracker {
      * @param key Имя заявки.
      * @return Массив заявок с именем key.
      */
-    Item[] findByName(String key) {
-        Item[] tmp = new Item[100];
-        int count = 0;
+    ArrayList<Item> findByName(String key) {
+        ArrayList<Item> result = new ArrayList<>();
         for (Item item : items) {
             if (item != null && item.getName().equals(key)) {
-                tmp[count++] = item;
+                result.add(item);
             }
         }
-        Item[] result = new Item[count];
-        System.arraycopy(tmp, 0, result, 0, count);
         return result;
     }
 
@@ -125,11 +113,19 @@ public class Tracker {
 
     private int findPosition(String id) {
         int result = -1;
-        for (int i = 0; i != items.length; i++) {
-            if (items[i] != null && items[i].getId().equals(id)) {
-                result = i;
+//        for (int i = 0; i != items.length; i++) {
+//            if (items[i] != null && items[i].getId().equals(id)) {
+//                result = i;
+//                break;
+//            }
+//        }
+        int index = 0;
+        for (Item item : items) {
+            if (item != null && item.getId().equals(id)) {
+                result = index;
                 break;
             }
+            index++;
         }
         return result;
     }
