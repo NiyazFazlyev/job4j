@@ -3,7 +3,7 @@ package ru.job4j.singleton;
 public class LoadOrder {
 
     private static final String STATIC_FINAL_FIELD = echo("static final field");
-    private static String static_field = echo("static field");
+    private static String staticField = echo("static field");
 
     static {
         echo("static block");
@@ -36,6 +36,6 @@ public class LoadOrder {
 
     private static final class Holder {
         private static final LoadOrder INSTANCE = new LoadOrder("static inner field");
-        private static String static_inner_field = echo("static field in Holder");
+        private static String staticInnerField = echo("static field in Holder");
     }
 }
