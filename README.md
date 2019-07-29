@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/NiyazFazlyev/job4j.svg?branch=master)](https://travis-ci.org/NiyazFazlyev/job4j)
+[![codecov](https://codecov.io/gh/NiyazFazlyev/job4j/branch/master/graph/badge.svg)](https://codecov.io/gh/NiyazFazlyev/job4j)
+
 # job4j
 # репозиторий Нияз Фазлыев
 
@@ -11,3 +14,4 @@
 Созданием ветки в IDEA.
 
 Объединение зафиксированных изменений
+
