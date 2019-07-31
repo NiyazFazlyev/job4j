@@ -31,7 +31,9 @@ public class Bank {
      */
     public void addAccountToUser(String passport, Account account) {
         User user = findByPassport(passport);
-        users.get(user).add(account);
+        if (user != null) {
+            users.get(user).add(account);
+        }
     }
 
     /**
@@ -42,7 +44,9 @@ public class Bank {
      */
     public void deleteAccountFromUser(String passport, Account account) {
         User user = findByPassport(passport);
-        users.get(user).remove(account);
+        if (user != null) {
+            users.get(user).remove(account);
+        }
     }
 
     /**
@@ -53,7 +57,7 @@ public class Bank {
      */
     public List<Account> getUserAccounts(String passport) {
         User user = findByPassport(passport);
-        return users.get(user);
+        return (user != null) ? users.get(user) : null;
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
@@ -82,7 +86,10 @@ public class Bank {
 
     private Account findAccount(String passport, String requisite) {
         User user = findByPassport(passport);
-        List<Account> accounts = users.get(user);
+        List<Account> accounts = new ArrayList<>();
+        if (user != null) {
+            accounts = users.get(user);
+        }
         Account result = null;
         for (Account account : accounts) {
             if (account.getRequisites().equals(requisite)) {
