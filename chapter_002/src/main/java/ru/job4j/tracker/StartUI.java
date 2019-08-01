@@ -1,17 +1,18 @@
 package ru.job4j.tracker;
 
+
+import java.util.function.Consumer;
+
 /**
  * @author Niyaz Fazlyev
  * @version 1.0
  * @since 25.06.2019
  */
+
 public class StartUI {
     private final Input input;
-
-    /**
-     * Хранилище заявок.
-     */
     private final Tracker tracker;
+    private final Consumer<String> output;
 
     private boolean working = true;
 
@@ -21,9 +22,10 @@ public class StartUI {
      * @param input   ввод данных.
      * @param tracker хранилище заявок.
      */
-    public StartUI(Input input, Tracker tracker) {
+    public StartUI(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
     }
 
     /**
@@ -32,14 +34,14 @@ public class StartUI {
      * @param args Входные параметры
      */
     public static void main(String[] args) {
-        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker()).init();
+        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker(), System.out::println).init();
     }
 
     /**
      * Основой цикл программы.
      */
     public void init() {
-        MenuTracker menu = new MenuTracker(input, tracker);
+        MenuTracker menu = new MenuTracker(input, tracker, output);
         menu.fillActions(this);
         int actions = menu.getActionsLength();
         int[] range = new int[actions];

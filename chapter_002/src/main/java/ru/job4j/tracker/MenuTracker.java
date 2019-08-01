@@ -2,19 +2,22 @@ package ru.job4j.tracker;
 
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class MenuTracker {
     private Input input;
     private Tracker tracker;
+    private Consumer<String> output;
     private ArrayList<UserAction> actions = new ArrayList<>();
 
     public int getActionsLength() {
         return this.actions.size();
     }
 
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
     }
 
     public void fillActions(StartUI ui) {
@@ -45,13 +48,13 @@ public class MenuTracker {
         }
 
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Добавление новой заявки --------------");
+            output.accept("------------ Добавление новой заявки --------------");
             String name = input.ask("Введите имя заявки :");
             String desc = input.ask("Введите описание заявки :");
             long currentTime = System.currentTimeMillis();
             Item item = new Item(name, desc, currentTime);
             tracker.add(item);
-            System.out.println("------------ Новая заявка с getId : " + item.getId() + "-----------");
+            output.accept("------------ Новая заявка с getId : " + item.getId() + "-----------");
 
         }
     }
@@ -62,12 +65,12 @@ public class MenuTracker {
         }
 
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Все заявки --------------");
+            output.accept("------------ Все заявки --------------");
             ArrayList<Item> items = tracker.findAll();
             for (Item item : items) {
-                System.out.print("Name : " + item.getName());
-                System.out.print("    Description : " + item.getDecs());
-                System.out.println("    Create Time : " + item.getTime());
+                output.accept(String.format("Name : %s    Description : %s    Create Time : %s",
+                        item.getName(), item.getDecs(), item.getTime()));
+
             }
         }
     }
@@ -77,7 +80,7 @@ public class MenuTracker {
             super(key, name);
         }
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Редактирование заявки --------------");
+            output.accept("------------ Редактирование заявки --------------");
             String id = input.ask("Введите id редактируемой заявки : ");
             String name = input.ask("Введите новое имя:");
             String desc = input.ask("Введите новое описание :");
@@ -85,9 +88,9 @@ public class MenuTracker {
             Item item = new Item(name, desc, currentTime);
             boolean result = tracker.replace(id, item);
             if (result) {
-                System.out.println(String.format("------------ Заявка с id %s редактирована -----------", id));
+                output.accept(String.format("------------ Заявка с id %s редактирована -----------", id));
             } else {
-                System.out.println("Не удалось редактировать заявку. Проверьте id.");
+                output.accept("Не удалось редактировать заявку. Проверьте id.");
             }
         }
     }
@@ -97,13 +100,13 @@ public class MenuTracker {
             super(key, name);
         }
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Удаление заявки --------------");
+            output.accept("------------ Удаление заявки --------------");
             String id = input.ask("Введите id заявки : ");
             boolean result = tracker.delete(id);
             if (result) {
-                System.out.println(String.format("------------ Заявка с id %s удалена -----------", id));
+                output.accept(String.format("------------ Заявка с id %s удалена -----------", id));
             } else {
-                System.out.println("Не удалось удалить заявку. Проверьте id.");
+                output.accept("Не удалось удалить заявку. Проверьте id.");
             }
         }
     }
@@ -113,16 +116,15 @@ public class MenuTracker {
             super(key, name);
         }
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Поиск заявки по id --------------");
+            output.accept("------------ Поиск заявки по id --------------");
             String id = input.ask("Введите id заявки : ");
             Item item = tracker.findById(id);
             if (item != null) {
-                System.out.print("Name : " + item.getName());
-                System.out.print("    Description : " + item.getDecs());
-                System.out.println("    Create Time : " + item.getTime());
+                output.accept(String.format("Name : %s    Description : %s    Create Time : %s",
+                        item.getName(), item.getDecs(), item.getTime()));
 
             } else {
-                System.out.println("Заявка не найдена. Проверьте id.");
+                output.accept("Заявка не найдена. Проверьте id.");
             }
         }
     }
