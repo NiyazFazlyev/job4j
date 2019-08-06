@@ -33,7 +33,6 @@ public class BankTest {
         bank.addAccountToUser("1111", account1);
         bank.addAccountToUser("2222", account2);
         boolean bln = bank.transferMoney("1111", "1234", "2222", "2345", 50);
-        System.out.println(bln);
         double result = account1.getValue();
         double except = 50;
         assertThat(result, is(except));

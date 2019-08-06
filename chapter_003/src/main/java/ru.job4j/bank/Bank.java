@@ -74,14 +74,14 @@ public class Bank {
 
     private User findByPassport(String passport) {
         Set<User> keys = users.keySet();
-        User result = null;
-        for (User user : keys) {
-            if (user.getPassport().equals(passport)) {
-                result = user;
-                break;
-            }
-        }
-        return result;
+        return keys.stream().filter(n->n.getPassport().equals(passport)).findFirst().get();
+//        for (User user : keys) {
+//            if (user.getPassport().equals(passport)) {
+//                result = user;
+//                break;
+//            }
+//        }
+//        return result;
     }
 
     private Account findAccount(String passport, String requisite) {
@@ -91,13 +91,14 @@ public class Bank {
             accounts = users.get(user);
         }
         Account result = null;
-        for (Account account : accounts) {
-            if (account.getRequisites().equals(requisite)) {
-                result = account;
-                break;
-            }
-        }
-        return result;
+        return accounts.stream().filter(n->n.getRequisites().equals(requisite)).findFirst().get();
+//        for (Account account : accounts) {
+//            if (account.getRequisites().equals(requisite)) {
+//                result = account;
+//                break;
+//            }
+//        }
+//        return result;
     }
 
 
