@@ -61,7 +61,7 @@ public class SchoolTest {
         Student student1 = new Student("Petr", 15);
         Student student2 = new Student("Oleg", 89);
         Student student3 = new Student("Ivan", 55);
-        List<Student> students = new LinkedList<>(Arrays.asList(student1, student2, student3));
+        List<Student> students = new LinkedList<>(Arrays.asList(student1, student2, student3, student1));
         Map<String, Student> expect = new LinkedHashMap<>();
         expect.put("Petr", student1);
         expect.put("Oleg", student2);
