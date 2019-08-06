@@ -2,10 +2,7 @@ package ru.job4j.stream;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -56,6 +53,20 @@ public class SchoolTest {
         students.addAll(Arrays.asList(student1, student2, student3, student4, student5, student6, student7));
         List<Student> result = School.collect(students, n -> n.getScore() < 50);
         List<Student> expect = new ArrayList<>(Arrays.asList(student1, student5, student6));
+        assertThat(result, is(expect));
+    }
+
+    @Test
+    public void whenCreateMap() {
+        Student student1 = new Student("Petr", 15);
+        Student student2 = new Student("Oleg", 89);
+        Student student3 = new Student("Ivan", 55);
+        List<Student> students = new LinkedList<>(Arrays.asList(student1, student2, student3));
+        Map<String, Student> expect = new LinkedHashMap<>();
+        expect.put("Petr", student1);
+        expect.put("Oleg", student2);
+        expect.put("Ivan", student3);
+        Map<String, Student> result = School.toMap(students);
         assertThat(result, is(expect));
     }
 }
