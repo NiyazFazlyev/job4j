@@ -18,8 +18,8 @@ public class Profile {
     public static List<Address> uniqueCollect(List<Profile> profiles) {
         return profiles.stream()
                 .map(n -> n.address)
-                .distinct()
                 .sorted(Comparator.comparing(Address::getCity))
+                .distinct()
                 .collect(Collectors.toList());
     }
 
