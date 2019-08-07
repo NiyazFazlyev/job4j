@@ -74,7 +74,7 @@ public class Bank {
 
     private User findByPassport(String passport) {
         Set<User> keys = users.keySet();
-        return keys.stream().filter(n->n.getPassport().equals(passport)).findFirst().get();
+        return keys.stream().filter(n->n.getPassport().equals(passport)).findFirst().orElse(null);
 //        for (User user : keys) {
 //            if (user.getPassport().equals(passport)) {
 //                result = user;
@@ -91,7 +91,7 @@ public class Bank {
             accounts = users.get(user);
         }
         Account result = null;
-        return accounts.stream().filter(n->n.getRequisites().equals(requisite)).findFirst().get();
+        return accounts.stream().filter(n->n.getRequisites().equals(requisite)).findFirst().orElse(null);
 //        for (Account account : accounts) {
 //            if (account.getRequisites().equals(requisite)) {
 //                result = account;
