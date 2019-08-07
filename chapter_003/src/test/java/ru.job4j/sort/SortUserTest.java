@@ -2,8 +2,6 @@ package ru.job4j.sort;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -13,52 +11,59 @@ import static org.junit.Assert.assertThat;
 public class SortUserTest {
     @Test
     public void whenSortByAge() {
-        List<User> list = new ArrayList<>();
-        User user1 = new User("Niyaz", 25);
-        User user2 = new User("Ivan", 21);
-        User user3 = new User("Misha", 20);
-        User user4 = new User("Artem", 21);
-        list.add(user1);
-        list.add(user2);
-        list.add(user3);
-        list.add(user4);
+        List<User> list = List.of(
+                new User("Niyaz", 25),
+                new User("Ivan", 21),
+                new User("Misha", 20),
+                new User("Artem", 21)
+        );
         SortUser su = new SortUser();
         Set<User> result = su.sort(list);
-        User[] expect = new User[]{user3, user4, user2, user1};
-        assertThat(result.toArray(new User[4]), is(expect));
+        User[] expect = {
+                new User("Misha", 20),
+                new User("Artem", 21),
+                new User("Ivan", 21),
+                new User("Niyaz", 25)
+        };
+        assertThat(result.toArray(new User[3]), is(expect));
     }
 
     @Test
     public void whenSortByNameLength() {
-        List<User> list = new ArrayList<>();
-        User user1 = new User("Niyaz", 25);
-        User user2 = new User("Ivan", 21);
-        User user3 = new User("Misha", 20);
-        User user4 = new User("Yan", 21);
-        list.add(user1);
-        list.add(user2);
-        list.add(user3);
-        list.add(user4);
+        List<User> list = List.of(
+                new User("Niyaz", 25),
+                new User("Ivan", 21),
+                new User("Misha", 20),
+                new User("Yan", 21)
+        );
         SortUser su = new SortUser();
         List<User> result = su.sortNameLength(list);
-        List<User> expect = new ArrayList<>(Arrays.asList(user4, user2, user1, user3));
+        List<User> expect = List.of(
+                new User("Yan", 21),
+                new User("Ivan", 21),
+                new User("Niyaz", 25),
+                new User("Misha", 20)
+        );
         assertThat(result, is(expect));
     }
 
     @Test
     public void whenSortByAllFields() {
-        List<User> list = new ArrayList<>();
-        User user1 = new User("Ivan", 25);
-        User user2 = new User("Ivan", 21);
-        User user3 = new User("Petr", 22);
-        User user4 = new User("Petr", 20);
-        list.add(user1);
-        list.add(user2);
-        list.add(user3);
-        list.add(user4);
+        List<User> list = List.of(
+                new User("Petr", 22),
+                new User("Petr", 20),
+                new User("Ivan", 25),
+                new User("Ivan", 21)
+        );
+
         SortUser su = new SortUser();
         List<User> result = su.sortByAllFields(list);
-        List<User> expect = new ArrayList<>(Arrays.asList(user2, user1, user4, user3));
+        List<User> expect = List.of(
+                new User("Ivan", 21),
+                new User("Ivan", 25),
+                new User("Petr", 20),
+                new User("Petr", 22)
+        );
         assertThat(result, is(expect));
     }
 

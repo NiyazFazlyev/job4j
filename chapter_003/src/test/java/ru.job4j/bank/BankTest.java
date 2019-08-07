@@ -19,7 +19,7 @@ public class BankTest {
         bank.addAccountToUser("1111", account1);
         bank.addAccountToUser("1111", account2);
         List<Account> result = bank.getUserAccounts("1111");
-        List<Account> except = new ArrayList<>(Arrays.asList(account1, account2));
+        List<Account> except = List.of(account1, account2);
         assertThat(result, is(except));
     }
 
