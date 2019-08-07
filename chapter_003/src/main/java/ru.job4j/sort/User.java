@@ -28,8 +28,8 @@ public class User implements Comparable<User> {
             return false;
         }
         User user = (User) o;
-        return age == user.age &&
-                name.equals(user.name);
+        return age == user.age
+                && name.equals(user.name);
     }
 
     @Override
