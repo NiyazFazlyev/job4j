@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PhoneDictionary {
-    private List<Person> persons = new ArrayList<Person>();
+    private List<Person> persons = new ArrayList<>();
 
     public void add(Person person) {
         this.persons.add(person);
@@ -18,9 +18,8 @@ public class PhoneDictionary {
      */
     public List<Person> find(String key) {
         List<Person> result = new ArrayList<>();
-        String str;
         for (Person person : this.persons) {
-            str = new StringBuilder(person.getName())
+            var str = new StringBuilder(person.getName())
                     .append(person.getSurname())
                     .append(person.getPhone())
                     .append(person.getAddress())

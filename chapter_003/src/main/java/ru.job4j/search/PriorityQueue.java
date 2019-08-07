@@ -13,8 +13,8 @@ public class PriorityQueue {
      * @param task задача
      */
     public void put(Task task) {
-        int index = 0;
-        boolean success = false;
+        var index = 0;
+        var success = false;
         if (tasks.isEmpty()) {
             tasks.add(0, task);
             success = true;
