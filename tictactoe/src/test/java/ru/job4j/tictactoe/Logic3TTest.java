@@ -1,6 +1,7 @@
-package job4j.tictactoe;
+package ru.job4j.tictactoe;
 
 import org.junit.Test;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -76,7 +77,7 @@ public class Logic3TTest {
     @Test
     public void whenHasNotGas() {
         Figure3T[][] table = {
-                {new Figure3T(true, false), new Figure3T(true, false), new Figure3T(false,true)},
+                {new Figure3T(true, false), new Figure3T(true, false), new Figure3T(false, true)},
                 {new Figure3T(false, true), new Figure3T(true, false), new Figure3T(true, false)},
                 {new Figure3T(true, false), new Figure3T(false, true), new Figure3T(true, false)},
         };
@@ -87,7 +88,7 @@ public class Logic3TTest {
     @Test
     public void whenHasGas() {
         Figure3T[][] table = {
-                {new Figure3T(true, false), new Figure3T(), new Figure3T(false,true)},
+                {new Figure3T(true, false), new Figure3T(), new Figure3T(false, true)},
                 {new Figure3T(false, true), new Figure3T(true, false), new Figure3T(true, false)},
                 {new Figure3T(true, false), new Figure3T(false, true), new Figure3T(true, false)},
         };
